@@ -28,20 +28,19 @@ body {
 
 .heading{
   padding: 5rem;
-
 }
 
 .input{
   color: black;
   margin-bottom: 1rem;
   position: relative;
-  border-radius: 2%
+  border-radius: 2%;
+  padding: 2%;
 }
 
 .submitbutton{
   margin-top: 2rem;
-  border-radius: 15%;
   background-color: white;
   color: black;
-  
+  padding: 2%;
 }

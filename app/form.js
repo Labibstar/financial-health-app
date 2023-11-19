@@ -20,7 +20,7 @@ const Form = () => {
     const minIncome = 0
     const minDebt = 0
   
-    const maxExpenses = 100000000000
+    const maxExpenses = 100000000000 // 100 Billion set as upper limit
     const maxAssets  = 100000000000
     const maxIncome  = 100000000000
     const maxDebt  = 100000000000
@@ -54,21 +54,22 @@ const Form = () => {
       const minPossibleScore = 0;
       const maxPossibleScore = 100;
       const normalizedScore = ((rawScore - minPossibleScore) / (maxPossibleScore - minPossibleScore)) * 100;
-    
-      setFinancialHealth(rawScore);
+      
+
+      setFinancialHealth(normalizedScore);
     };
     
      // Visualization variables //
 
      const [isLoading, setIsLoading] = useState(true);
-     const [healthScore, setHealthScore] = useState(null);
+     
    
      useEffect(() => {
       // Simulating data fetching/loading
-      setTimeout(() => {
+      
         setIsLoading(false);
-        setHealthScore(75); // Replace with your actual health score data
-      }, 2000); // Simulating a 2-second data loading delay
+        // Replace with your actual health score data
+      
     }, []);
 
     const handleSubmit = async (e) => {
@@ -88,7 +89,7 @@ const Form = () => {
       try {
         
         const documentId = await addFinancialData(formData);
-        console.log('Financial data added with ID: ', documentId);
+        console.log('Financial data added with ID: ');
   
         
       } catch (error) {
@@ -164,9 +165,9 @@ const Form = () => {
         </form>
   
         {financialHealth !== null && (
-          <div>
-            <h2>Financial Health Score: {financialHealth}</h2>
-            <LoadingHealthBar isLoading={isLoading} healthScore={healthScore} />
+          <div className='mt-2'>
+            <h2>Financial Health Score: {(financialHealth*100).toFixed(2)}%</h2>
+            <LoadingHealthBar isLoading={isLoading} healthScore={financialHealth} />
             
           </div>
         )}
