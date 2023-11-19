@@ -25,3 +25,23 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.heading{
+  padding: 5rem;
+
+}
+
+.input{
+  color: black;
+  margin-bottom: 1rem;
+  position: relative;
+  border-radius: 2%
+}
+
+.submitbutton{
+  margin-top: 2rem;
+  border-radius: 15%;
+  background-color: white;
+  color: black;
+  
+}
