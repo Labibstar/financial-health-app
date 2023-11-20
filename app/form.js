@@ -7,14 +7,20 @@ import LoadingHealthBar from './loadingHealthBar';
 const Form = () => {
 
    // Main Financial health calculation variables //
-
+    
+    const [month, setMonth] = useState("January");
     const [expenses, setExpenses] = useState(null);
     const [debt, setDebt] = useState(null);
     const [assets, setAssets] = useState(null);
     const [income, setIncome] = useState(null);
     const [financialHealth, setFinancialHealth] = useState(null);
 
-   
+    useEffect(() =>{
+      console.log(month);
+      
+    }, [month, financialHealth] );
+
+    
     const minExpenses = 0
     const minAssets = 0
     const minIncome = 0
@@ -52,31 +58,19 @@ const Form = () => {
       
         const normalizedScore = Math.min(Math.max(healthScore, 0), 1);  
      
-      setFinancialHealth(normalizedScore);
-      
-      setTimeout(() => {
-
-        if(financialHealth !== null){
-        addData();}
-      }, 2000);
-      
+      setFinancialHealth(normalizedScore);      
+      addData();
     };
     
      // Visualization variables //
 
-     const [isLoading, setIsLoading] = useState(true);
-     
-   
-     useEffect(() => {
-     
-      setIsLoading(false);
-      
-    }, []);
+     const [isLoading, setIsLoading] = useState(false);
+    
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       calculateFinancialHealth();
-      console.log(financialHealth);
+      
     
     };
 
@@ -93,7 +87,7 @@ const Form = () => {
       }
      
      try {
-        const documentId = await addFinancialData(formData);
+        const documentId = await addFinancialData(formData, month);
         console.log('Financial data added with ID: '+documentId);
    
       } catch (error) {
@@ -116,6 +110,29 @@ const Form = () => {
         <form className="form">
         <div className='grid grid-cols-2'>
           
+          <div className='grid '>
+          <label>
+            Month:
+          </label>
+          </div>
+  
+          <div className='grid'>
+            <select className='input' onChange={(e) => {setMonth(e.target.value); console.log(month)}} name="month">
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+          </div>
+
           <div className='grid '>
           <label>
             Expenses:
