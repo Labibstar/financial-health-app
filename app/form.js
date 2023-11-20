@@ -37,26 +37,29 @@ const Form = () => {
       const monthlySavingsWeight = 0.5;
       const debtToIncomeRatioWeight = 0.0002;
       const expenseToIncomeRatioWeight = 0.45;
-  
-    
+     
+     
       // Calculate normalized ratios
       const debtToIncomeRatio = normalizedDebt / normalizedIncome;
       const expenseToIncomeRatio = normalizedExpenses / normalizedIncome;
     
       // Calculate the raw financial health score
-      const rawScore =
+      const healthScore =
         (normalizedAssets - normalizedDebt) * netWorthWeight +
         (normalizedIncome - normalizedExpenses) * monthlySavingsWeight +
         (1 - debtToIncomeRatio) * debtToIncomeRatioWeight +
         (1 - expenseToIncomeRatio) * expenseToIncomeRatioWeight;
-    
-      // Normalize the raw score to a range between 0 and 100
-      const minPossibleScore = 0;
-      const maxPossibleScore = 100;
-      const normalizedScore = ((rawScore - minPossibleScore) / (maxPossibleScore - minPossibleScore)) * 100;
       
-
+        const normalizedScore = Math.min(Math.max(healthScore, 0), 1);  
+     
       setFinancialHealth(normalizedScore);
+      
+      setTimeout(() => {
+
+        if(financialHealth !== null){
+        addData();}
+      }, 2000);
+      
     };
     
      // Visualization variables //
@@ -65,19 +68,22 @@ const Form = () => {
      
    
      useEffect(() => {
-      // Simulating data fetching/loading
-      
-        setIsLoading(false);
-        // Replace with your actual health score data
+     
+      setIsLoading(false);
       
     }, []);
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       calculateFinancialHealth();
+      console.log(financialHealth);
+    
+    };
 
       // Backend operations //
 
+    const addData = async () => {
+      
       const formData = {
         assets: assets,
         expenses: expenses,
@@ -85,25 +91,25 @@ const Form = () => {
         income: income,
         health: financialHealth
       }
-  
-      try {
-        
+     
+     try {
         const documentId = await addFinancialData(formData);
-        console.log('Financial data added with ID: ');
-  
-        
+        console.log('Financial data added with ID: '+documentId);
+   
       } catch (error) {
         console.error('Error adding financial data: ', error);
         
-      }
-    };
+      } 
+    }
     
   
     
     return (
-      <div className='grid place-content-center place-items-center h-screen'>
+        <div className='grid grid-cols-2 ml-28'>
+        
+        <div className='grid'>  
         <div className='heading'>
-        <h1 className='align-middle '>Financial Health Indicator</h1>
+        <h1 className='align-middle max-w-full '>Financial Health Indicator</h1>
   
         </div>
   
@@ -158,19 +164,24 @@ const Form = () => {
         </div>
   
         <div className='grid place-content-center self-align-center submitbutton'>
-          <button type="button" onClick={handleSubmit}>
-            Calculate Financial Health
-          </button>
+          
+            <button type="button" onClick={handleSubmit}>
+              Calculate Financial Health
+            </button>
+            
         </div>
+        
         </form>
-  
+        </div>
+
         {financialHealth !== null && (
-          <div className='mt-2'>
-            <h2>Financial Health Score: {(financialHealth*100).toFixed(2)}%</h2>
+          <div className='grid mt-28 ml-[10rem]'>
             <LoadingHealthBar isLoading={isLoading} healthScore={financialHealth} />
+            <h2 className='mt-12'>Financial Health Score: {(financialHealth*100).toFixed(2)}%</h2>
             
           </div>
-        )}
+        )
+        }
       </div>
     );
   };

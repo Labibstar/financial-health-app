@@ -2,19 +2,13 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 const LoadingHealthBar = ({ healthScore }) => {
-   
-    console.log(healthScore);
-  // Normalize the health score to a percentage between 0 and 100
-  const normalizedScore = Math.min(Math.max(healthScore*100, 0), 100);
   
-  console.log("loading score"+normalizedScore);
   return (
-    <div style={{ background: 'white', width: '100%', height: '20px', position: 'relative', overflow: 'hidden' }}>
-      <Skeleton
+    <div className='loadingBar'>
+      <Skeleton className='skeletonBar'
         style={{
-          background: 'aquamarine',
-          width: `${normalizedScore}%`,
-          height: '100%',
+          height: `${healthScore*100}%`,
+          width: '100%',
           borderRadius: '4px',
           position: 'absolute',
         }}
