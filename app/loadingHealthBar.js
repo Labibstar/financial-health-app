@@ -7,7 +7,7 @@ const LoadingHealthBar = ({ healthScore }) => {
     <div className='loadingBar'>
       <Skeleton className='skeletonBar'
         style={{
-          height: `${healthScore*100}%`,
+          height: `${healthScore*100}%`, 
           width: '100%',
           borderRadius: '4px',
           position: 'absolute',

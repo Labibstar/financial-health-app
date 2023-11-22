@@ -16,9 +16,10 @@ const Form = () => {
     const [financialHealth, setFinancialHealth] = useState(null);
 
     useEffect(() =>{
-      console.log(month);
-      
-    }, [month, financialHealth] );
+      if(financialHealth !=null){
+      addData();
+      }
+    }, [financialHealth] );
 
     
     const minExpenses = 0
@@ -59,7 +60,7 @@ const Form = () => {
         const normalizedScore = Math.min(Math.max(healthScore, 0), 1);  
      
       setFinancialHealth(normalizedScore);      
-      addData();
+      
     };
     
      // Visualization variables //
@@ -83,12 +84,13 @@ const Form = () => {
         expenses: expenses,
         debt: debt,
         income: income,
-        health: financialHealth
+        health: financialHealth,
+        month: month
       }
      
      try {
         const documentId = await addFinancialData(formData, month);
-        console.log('Financial data added with ID: '+documentId);
+        console.log('Financial data added for '+month);
    
       } catch (error) {
         console.error('Error adding financial data: ', error);
@@ -99,7 +101,7 @@ const Form = () => {
   
     
     return (
-        <div className='grid grid-cols-2 ml-28'>
+        <div className='grid grid-cols-2 ml-28 '>
         
         <div className='grid'>  
         <div className='heading'>
@@ -107,7 +109,7 @@ const Form = () => {
   
         </div>
   
-        <form className="form">
+        <form className="form ">
         <div className='grid grid-cols-2'>
           
           <div className='grid '>
@@ -139,7 +141,7 @@ const Form = () => {
           </label>
           </div>
   
-          <div className='grid'>
+          <div className='grid '>
            <input className="input" type="number"  onChange={(e) => setExpenses(Number(e.target.value))} />
           </div>
          
@@ -192,7 +194,7 @@ const Form = () => {
         </div>
 
         {financialHealth !== null && (
-          <div className='grid mt-28 ml-[10rem]'>
+          <div className='grid mt-28 ml-[16rem] max-content'>
             <LoadingHealthBar isLoading={isLoading} healthScore={financialHealth} />
             <h2 className='mt-12'>Financial Health Score: {(financialHealth*100).toFixed(2)}%</h2>
             
