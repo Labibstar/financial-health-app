@@ -1,9 +1,9 @@
 
 ## Financial Health App
 
-Check it out in this link: https://financial-health-app-38ed6.web.app/
-
 This app allows SMEs to calculate their Financial Health for the month based on their assets, debt, expenses and their monthly income. 
+
+Check it out in this link: https://financial-health-app-38ed6.web.app/
 
 ### To Calculate your Business' Financial Health
 Enter the following information: 
