@@ -14,7 +14,7 @@ Enter the following information:
      Assets
      Income
 
-Click on the Calculale Financial health button to see your business financial health for that month
+Click on the Calculate Financial health button to see your business financial health for that month
 
 ### To View your financial health across the year
 
