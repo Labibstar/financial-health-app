@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "firebase-init": "firebase init",
+    "firebase-login": "firebase login",
+    "firebase-deploy": "firebase deploy",
+    "firebase-config": "node firebase.js"
   },
   "dependencies": {
     "firebase": "^10.6.0",

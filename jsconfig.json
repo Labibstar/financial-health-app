@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "/",
     "paths": {
-      "@/*": ["./*"]
+      "pages/404": ["./pages/404.js"]
+      
     }
   }
 }
